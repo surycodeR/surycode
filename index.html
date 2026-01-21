@@ -423,73 +423,6 @@
             background: rgba(255, 255, 255, 0.1);
         }
         
-        /* Новая секция: Portfolio */
-        .portfolio {
-            padding: 120px 0;
-        }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
-        }
-        
-        .portfolio-card {
-            background: var(--gray);
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            transition: all 0.4s;
-        }
-        
-        .portfolio-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-            border-color: var(--accent);
-        }
-        
-        .portfolio-img {
-            height: 200px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-        }
-        
-        .portfolio-content {
-            padding: 30px;
-        }
-        
-        .portfolio-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 15px;
-            color: var(--white);
-        }
-        
-        .portfolio-desc {
-            color: var(--text-gray);
-            margin-bottom: 20px;
-            line-height: 1.7;
-        }
-        
-        .portfolio-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .portfolio-tech span {
-            padding: 6px 15px;
-            background: rgba(0, 168, 255, 0.1);
-            border-radius: 50px;
-            color: var(--accent);
-            font-size: 0.9rem;
-            font-weight: 600;
-        }
-        
         /* Новая секция: Stats */
         .stats {
             padding: 100px 0;
@@ -871,10 +804,6 @@
                 grid-template-columns: 1fr;
             }
             
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
-            
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
@@ -975,7 +904,6 @@
         </button>
         <ul class="mobile-nav-links">
             <li><a href="#services">Услуги</a></li>
-            <li><a href="#portfolio">Портфолио</a></li>
             <li><a href="#stats">Опыт</a></li>
             <li><a href="#contact">Контакты</a></li>
         </ul>
@@ -1007,8 +935,9 @@
                     <a href="#contact" class="btn btn-primary">
                         <i class="fab fa-telegram"></i> Обсудить проект
                     </a>
-                    <a href="#portfolio" class="btn btn-outline">
-                        <i class="fas fa-code"></i> Посмотреть работы
+                    <!-- Изменено: убрана ссылка на несуществующее портфолио -->
+                    <a href="#stats" class="btn btn-outline">
+                        <i class="fas fa-chart-bar"></i> Опыт и результаты
                     </a>
                 </div>
             </div>
@@ -1134,7 +1063,7 @@
                     
                     <div class="telegram-cta">
                         <p style="color: var(--text-light); margin-bottom: 20px; font-size: 1.1rem;">Отправьте сообщение прямо сейчас для быстрого старта</p>
-                        <a href="#" class="btn btn-primary telegram-btn" id="telegramBtn">
+                        <a href="https://t.me/SuryCode" target="_blank" class="btn btn-primary telegram-btn" id="telegramBtn">
                             <i class="fab fa-telegram"></i> Написать в Telegram
                         </a>
                     </div>
@@ -1178,7 +1107,7 @@
                 </a>
                 
                 <div class="social-links">
-                    <a href="#" class="social-link" id="telegramSocial">
+                    <a href="https://t.me/SuryCode" target="_blank" class="social-link" id="telegramSocial">
                         <i class="fab fa-telegram"></i>
                     </a>
                 </div>
@@ -1219,32 +1148,20 @@
             });
         });
         
-        // Telegram buttons
+        // Telegram buttons - FIXED: теперь ссылки работают правильно
         const telegramBtn = document.getElementById('telegramBtn');
         const telegramSocial = document.getElementById('telegramSocial');
         
+        // Убрал обработчики, так как ссылки уже есть в HTML
+        // Оставил только для совместимости если нужно что-то дополнительное
         telegramBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open('https://t.me/SuryCode', '_blank');
+            // Дополнительная логика если нужна
+            console.log('Открытие Telegram...');
         });
         
         telegramSocial.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open('https://t.me/SuryCode', '_blank');
-        });
-        
-        // GitHub button
-        const githubSocial = document.getElementById('githubSocial');
-        githubSocial.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.open('https://github.com', '_blank');
-        });
-        
-        // Email button
-        const emailSocial = document.getElementById('emailSocial');
-        emailSocial.addEventListener('click', (e) => {
-            e.preventDefault();
-            window.location.href = 'mailto:contact@surycode.ru';
+            // Дополнительная логика если нужна
+            console.log('Открытие Telegram из футера...');
         });
         
         // Smooth scroll
