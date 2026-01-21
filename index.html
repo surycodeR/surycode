@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SuryCode | Разработчик ботов и ПО</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #00d9ff;
+            --primary-dark: #00a8cc;
+            --secondary: #6c63ff;
+            --dark-bg: #0a0a0f;
+            --dark-card: #15151f;
+            --dark-border: #2a2a3a;
+            --text-primary: #f0f0f0;
+            --text-secondary: #a0a0b0;
+            --success: #00c853;
+            --warning: #ff9800;
+            --danger: #f44336;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        section {
+            padding: 100px 0;
+        }
+        
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.2;
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            background: linear-gradient(90deg, var(--primary), var(--primary-dark));
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 217, 255, 0.2);
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 217, 255, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: none;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(0, 217, 255, 0.1);
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 6px 14px;
+            background-color: rgba(0, 217, 255, 0.1);
+            color: var(--primary);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        
+        /* Header & Navigation */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 20px 0;
+            background-color: rgba(10, 10, 15, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--dark-border);
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--primary);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 40px;
+        }
+        
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding-top: 180px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-content {
+            max-width: 700px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .hero-btns {
+            margin-top: 2.5rem;
+        }
+        
+        .hero-btns .btn {
+            margin-right: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .hero-code-bg {
+            position: absolute;
+            top: 100px;
+            right: 0;
+            width: 50%;
+            height: 100%;
+            opacity: 0.1;
+            z-index: -1;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+            overflow: hidden;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            margin-top: 20px;
+        }
+        
+        /* Services Section */
+        .services {
+            background-color: rgba(15, 15, 25, 0.5);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background-color: var(--dark-card);
+            border-radius: 12px;
+            padding: 30px;
+            border: 1px solid var(--dark-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: var(--primary);
+        }
+        
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--primary);
+        }
+        
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+        
+        .contact-info {
+            margin-top: 30px;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--dark-card);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            color: var(--primary);
+            font-size: 1.2rem;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark-card);
+            padding: 50px 0 30px;
+            border-top: 1px solid var(--dark-border);
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+        }
+        
+        .footer-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-left: 30px;
+        }
+        
+        .footer-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+        
+        .copyright {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            padding-top: 30px;
+            border-top: 1px solid var(--dark-border);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .about-content, .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+            
+            .hero-code-bg {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: var(--dark-card);
+                flex-direction: column;
+                padding: 20px;
+                border-top: 1px solid var(--dark-border);
+            }
+            
+            .nav-links.active {
+                display: flex;
+            }
+            
+            .nav-links li {
+                margin: 15px 0;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .footer-links {
+                margin-top: 20px;
+            }
+            
+            .footer-links li {
+                margin: 0 15px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            section {
+                padding: 70px 0;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                padding-top: 140px;
+            }
+            
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">Sury<span>Code</span></a>
+                
+                <ul class="nav-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+                
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Привет, я @SuryCode</h1>
+                <p class="hero-subtitle">Разработчик Telegram-ботов, парсеров и ПО на Python, Java и C#. Создаю решения от 5к рублей с использованием современного стека технологий.</p>
+                
+                <div class="tech-stack">
+                    <span class="tag">Python</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">C#</span>
+                    <span class="tag">aiogram</span>
+                    <span class="tag">telebot</span>
+                    <span class="tag">aiohttp</span>
+                    <span class="tag">SQLite3</span>
+                    <span class="tag">vk_api</span>
+                    <span class="tag">numpy</span>
+                    <span class="tag">ollama</span>
+                    <span class="tag">pandas</span>
+                    <span class="tag">requests</span>
+                </div>
+                
+                <div class="hero-btns">
+                    <a href="#contact" class="btn">Связаться со мной</a>
+                    <a href="#services" class="btn btn-secondary">Мои услуги</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Code background for hero -->
+        <div class="hero-code-bg">
+            <pre><code>
+    # Пример кода бота на aiogram
+    from aiogram import Bot, Dispatcher, types
+    from aiogram.contrib.fsm_storage.memory import MemoryStorage
+    
+    bot = Bot(token="YOUR_TOKEN")
+    storage = MemoryStorage()
+    dp = Dispatcher(bot, storage=storage)
+    
+    @dp.message_handler(commands=['start'])
+    async def start_cmd(message: types.Message):
+        await message.answer("Привет! Я бот от @SuryCode")
+    
+    if __name__ == '__main__':
+        executor.start_polling(dp)
+            </code></pre>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Обо мне</h2>
+            <div class="about-content">
+                <div>
+                    <h3>Профессиональный разработчик ПО и ботов</h3>
+                    <p>Специализируюсь на создании Telegram-ботов различной сложности, начиная от простых информационных ботов и заканчивая сложными системами с интеграцией платежей, баз данных и AI.</p>
+                    <p>Пишу на Python, Java и C#, использую современные фреймворки и библиотеки для создания эффективных и надежных решений.</p>
+                    <p>Также занимаюсь разработкой парсеров данных, десктопных приложений и интеграцией различных API.</p>
+                </div>
+                
+                <div>
+                    <h3>Мой стек технологий</h3>
+                    <p>В работе использую проверенные инструменты, которые позволяют создавать качественный код и эффективные решения:</p>
+                    
+                    <div class="tech-stack">
+                        <span class="tag">Python</span>
+                        <span class="tag">Java</span>
+                        <span class="tag">C#</span>
+                        <span class="tag">.NET</span>
+                        <span class="tag">aiogram</span>
+                        <span class="tag">pyTelegramBotAPI</span>
+                        <span class="tag">aiohttp</span>
+                        <span class="tag">asyncio</span>
+                        <span class="tag">SQLite3</span>
+                        <span class="tag">PostgreSQL</span>
+                        <span class="tag">vk_api</span>
+                        <span class="tag">numpy</span>
+                        <span class="tag">pandas</span>
+                        <span class="tag">requests</span>
+                        <span class="tag">BeautifulSoup</span>
+                        <span class="tag">Selenium</span>
+                        <span class="tag">ollama</span>
+                        <span class="tag">FastAPI</span>
+                        <span class="tag">Django</span>
+                        <span class="tag">Git</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <h2>Мои услуги</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fab fa-telegram"></i>
+                    </div>
+                    <h3>Telegram-боты</h3>
+                    <p>Разработка ботов любой сложности на aiogram и pyTelegramBotAPI. От простых информационных ботов до сложных систем с админ-панелями, платежами и интеграцией с базами данных.</p>
+                    <p><strong>От 5 000 руб.</strong></p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Парсеры данных</h3>
+                    <p>Создание парсеров для сбора информации с сайтов, социальных сетей и API. Использую BeautifulSoup, Selenium, Scrapy и aiohttp для быстрого и эффективного сбора данных.</p>
+                    <p><strong>От 7 000 руб.</strong></p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3>Десктопные приложения</h3>
+                    <p>Разработка программного обеспечения для Windows на C#/.NET и Java. Создание удобных интерфейсов, работа с базами данных и интеграция с внешними сервисами.</p>
+                    <p><strong>От 10 000 руб.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Свяжитесь со мной</h2>
+            <div class="contact-content">
+                <div>
+                    <h3>Готов обсудить ваш проект</h3>
+                    <p>Если вам нужен качественный Telegram-бот, парсер или другое программное решение, напишите мне в Telegram. Обсудим требования, сроки и стоимость реализации.</p>
+                    <p>Работаю как над небольшими проектами, так и над сложными системами с длительной поддержкой.</p>
+                    
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fab fa-telegram"></i>
+                            </div>
+                            <div>
+                                <h4>Telegram</h4>
+                                <p id="telegram-link">@SuryCode</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <div>
+                                <h4>Стек технологий</h4>
+                                <p>Python, Java, C#, aiogram, SQLite3, vk_api, numpy, pandas, requests</p>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <div>
+                                <h4>Бюджет проектов</h4>
+                                <p>От 5 000 рублей и выше, в зависимости от сложности и сроков</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3>Почему выбирают меня</h3>
+                    <ul style="color: var(--text-secondary); padding-left: 20px; margin-bottom: 30px;">
+                        <li style="margin-bottom: 10px;">Чистый, документированный код</li>
+                        <li style="margin-bottom: 10px;">Соблюдение сроков реализации</li>
+                        <li style="margin-bottom: 10px;">Поддержка после завершения проекта</li>
+                        <li style="margin-bottom: 10px;">Использование современных технологий</li>
+                        <li style="margin-bottom: 10px;">Гибкая система оплаты</li>
+                        <li>Конфиденциальность данных</li>
+                    </ul>
+                    
+                    <a href="#" id="telegram-btn" class="btn" style="width: 100%; text-align: center;">
+                        <i class="fab fa-telegram"></i> Написать в Telegram
+                    </a>
+                    
+                    <p style="margin-top: 20px; font-size: 0.9rem; text-align: center;">Обычно отвечаю в течение 1-2 часов в рабочее время</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <a href="#" class="logo">Sury<span>Code</span></a>
+                
+                <ul class="footer-links">
+                    <li><a href="#home">Главная</a></li>
+                    <li><a href="#about">Обо мне</a></li>
+                    <li><a href="#services">Услуги</a></li>
+                    <li><a href="#contact">Контакты</a></li>
+                </ul>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 SuryCode. Все права защищены.</p>
+                <p>Разработка Telegram-ботов, парсеров и ПО на Python, Java, C#.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.mobile-menu-btn').addEventListener('click', function() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking on a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.querySelector('.nav-links').classList.remove('active');
+            });
+        });
+        
+        // Telegram link functionality
+        document.getElementById('telegram-btn').addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            // You can change the Telegram username here
+            const telegramUsername = 'SuryCode';
+            const telegramUrl = `https://t.me/${telegramUsername}`;
+            
+            // Open Telegram in a new tab
+            window.open(telegramUrl, '_blank');
+        });
+        
+        // Update Telegram link in contact section
+        document.getElementById('telegram-link').addEventListener('click', function() {
+            const telegramUsername = 'SuryCode';
+            const telegramUrl = `https://t.me/${telegramUsername}`;
+            window.open(telegramUrl, '_blank');
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Sticky header on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if(window.scrollY > 100) {
+                header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
