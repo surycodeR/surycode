@@ -14,8 +14,11 @@
             --white: #ffffff;
             --accent: #00a8ff;
             --accent-dark: #0088cc;
+            --accent-glow: rgba(0, 168, 255, 0.15);
             --text-light: #e0e0e0;
             --text-gray: #888;
+            --success: #00d95f;
+            --gradient: linear-gradient(135deg, var(--accent), var(--accent-dark));
         }
         
         * {
@@ -30,6 +33,7 @@
             color: var(--white);
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
         
         .container {
@@ -39,51 +43,65 @@
             padding: 0 20px;
         }
         
-        /* Header */
+        /* Header улучшенный */
         header {
             position: fixed;
             top: 0;
             width: 100%;
-            background-color: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(15px);
             z-index: 1000;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            transition: all 0.3s ease;
+        }
+        
+        header.scrolled {
+            padding: 0;
+            box-shadow: 0 5px 30px rgba(0, 0, 0, 0.5);
         }
         
         .nav-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 0;
+            padding: 18px 0;
+            transition: padding 0.3s;
         }
         
         .logo {
             display: flex;
             align-items: center;
             gap: 10px;
-            font-size: 1.5rem;
-            font-weight: 700;
+            font-size: 1.6rem;
+            font-weight: 800;
             color: var(--white);
             text-decoration: none;
+            transition: transform 0.3s;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
         }
         
         .logo-dot {
             color: var(--accent);
+            text-shadow: 0 0 10px var(--accent);
         }
         
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 45px;
             list-style: none;
         }
         
         .nav-links a {
             color: var(--text-light);
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             font-size: 1rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
             position: relative;
+            padding: 5px 0;
         }
         
         .nav-links a:hover {
@@ -93,12 +111,12 @@
         .nav-links a::after {
             content: '';
             position: absolute;
-            bottom: -5px;
+            bottom: 0;
             left: 0;
             width: 0;
             height: 2px;
-            background: var(--accent);
-            transition: width 0.3s;
+            background: var(--gradient);
+            transition: width 0.3s ease;
         }
         
         .nav-links a:hover::after {
@@ -112,36 +130,52 @@
             color: var(--white);
             font-size: 1.5rem;
             cursor: pointer;
+            transition: transform 0.3s;
         }
         
-        /* Hero */
+        .mobile-menu-btn:hover {
+            transform: scale(1.1);
+        }
+        
+        /* Hero улучшенный */
         .hero {
-            padding: 180px 0 120px;
+            padding: 200px 0 150px;
             position: relative;
             overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
         }
         
         .hero-content {
-            max-width: 700px;
+            max-width: 750px;
             position: relative;
             z-index: 2;
         }
         
         .hero-title {
-            font-size: 3.5rem;
-            font-weight: 800;
+            font-size: 3.8rem;
+            font-weight: 900;
             line-height: 1.1;
             margin-bottom: 25px;
             background: linear-gradient(90deg, var(--white), var(--accent));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes textGlow {
+            0% { background-position: 0% 50%; }
+            100% { background-position: 100% 50%; }
         }
         
         .hero-subtitle {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             color: var(--text-gray);
             margin-bottom: 40px;
-            max-width: 600px;
+            max-width: 650px;
+            line-height: 1.8;
         }
         
         .tech-tags {
@@ -152,51 +186,74 @@
         }
         
         .tech-tag {
-            padding: 10px 20px;
-            background: rgba(0, 168, 255, 0.1);
+            padding: 12px 24px;
+            background: rgba(0, 168, 255, 0.08);
             border: 1px solid rgba(0, 168, 255, 0.2);
             border-radius: 50px;
             color: var(--accent);
-            font-weight: 500;
+            font-weight: 600;
             font-size: 0.95rem;
             transition: all 0.3s;
+            cursor: default;
+            position: relative;
+            overflow: hidden;
         }
         
         .tech-tag:hover {
-            background: rgba(0, 168, 255, 0.2);
-            transform: translateY(-2px);
+            background: rgba(0, 168, 255, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px var(--accent-glow);
         }
         
         .hero-btns {
             display: flex;
             gap: 20px;
-            margin-top: 40px;
+            margin-top: 50px;
         }
         
         .btn {
-            padding: 16px 32px;
+            padding: 18px 36px;
             border-radius: 12px;
-            font-weight: 600;
-            font-size: 1rem;
+            font-weight: 700;
+            font-size: 1.05rem;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 10px;
-            transition: all 0.3s;
+            gap: 12px;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn:hover::after {
+            width: 300px;
+            height: 300px;
         }
         
         .btn-primary {
-            background: var(--accent);
+            background: var(--gradient);
             color: var(--white);
-            box-shadow: 0 5px 20px rgba(0, 168, 255, 0.3);
+            box-shadow: 0 5px 25px rgba(0, 168, 255, 0.4);
         }
         
         .btn-primary:hover {
-            background: var(--accent-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 168, 255, 0.4);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 35px rgba(0, 168, 255, 0.6);
         }
         
         .btn-outline {
@@ -207,137 +264,348 @@
         
         .btn-outline:hover {
             background: rgba(0, 168, 255, 0.1);
-            transform: translateY(-3px);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px var(--accent-glow);
         }
         
         .hero-bg {
             position: absolute;
-            top: -200px;
-            right: -200px;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 168, 255, 0.1) 0%, transparent 70%);
+            top: 50%;
+            right: -100px;
+            width: 900px;
+            height: 900px;
+            background: radial-gradient(circle, rgba(0, 168, 255, 0.15) 0%, transparent 70%);
             z-index: 1;
+            transform: translateY(-50%);
+            animation: float 6s ease-in-out infinite;
         }
         
-        /* Services */
+        @keyframes float {
+            0%, 100% { transform: translateY(-50%) rotate(0deg); }
+            50% { transform: translateY(-55%) rotate(5deg); }
+        }
+        
+        /* Services улучшенный */
         .services {
-            padding: 100px 0;
+            padding: 120px 0;
             background: var(--darker);
+            position: relative;
         }
         
         .section-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 60px;
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin-bottom: 80px;
             text-align: center;
             color: var(--white);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
         }
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 30px;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 35px;
         }
         
         .service-card {
             background: var(--gray);
-            border-radius: 16px;
-            padding: 40px;
-            border: 1px solid var(--light-gray);
-            transition: all 0.3s;
+            border-radius: 20px;
+            padding: 45px 35px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient);
+            opacity: 0;
+            transition: opacity 0.4s;
+            z-index: 0;
+        }
+        
+        .service-card:hover::before {
+            opacity: 0.05;
         }
         
         .service-card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-12px) scale(1.02);
             border-color: var(--accent);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+        
+        .service-card > * {
+            position: relative;
+            z-index: 1;
         }
         
         .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
-            border-radius: 16px;
+            width: 80px;
+            height: 80px;
+            background: var(--gradient);
+            border-radius: 18px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 20px rgba(0, 168, 255, 0.3);
         }
         
         .service-icon i {
-            font-size: 1.8rem;
+            font-size: 2rem;
         }
         
         .service-title {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-size: 1.7rem;
+            font-weight: 700;
+            margin-bottom: 18px;
             color: var(--white);
         }
         
         .service-desc {
             color: var(--text-gray);
-            margin-bottom: 20px;
-            line-height: 1.6;
+            margin-bottom: 25px;
+            line-height: 1.7;
+            font-size: 1.05rem;
+        }
+        
+        .service-features {
+            list-style: none;
+            margin-bottom: 25px;
+        }
+        
+        .service-features li {
+            padding: 8px 0;
+            color: var(--text-light);
+            position: relative;
+            padding-left: 25px;
+        }
+        
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-weight: bold;
         }
         
         .service-price {
             color: var(--accent);
-            font-weight: 700;
-            font-size: 1.3rem;
+            font-weight: 800;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
-        /* Contact */
-        .contact {
+        .service-price::before {
+            content: '';
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Новая секция: Portfolio */
+        .portfolio {
+            padding: 120px 0;
+        }
+        
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .portfolio-card {
+            background: var(--gray);
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s;
+        }
+        
+        .portfolio-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            border-color: var(--accent);
+        }
+        
+        .portfolio-img {
+            height: 200px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-dark));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+        }
+        
+        .portfolio-content {
+            padding: 30px;
+        }
+        
+        .portfolio-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--white);
+        }
+        
+        .portfolio-desc {
+            color: var(--text-gray);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .portfolio-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .portfolio-tech span {
+            padding: 6px 15px;
+            background: rgba(0, 168, 255, 0.1);
+            border-radius: 50px;
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        /* Новая секция: Stats */
+        .stats {
             padding: 100px 0;
+            background: var(--darker);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+        }
+        
+        .stat-card {
+            text-align: center;
+            padding: 40px 20px;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.3s;
+        }
+        
+        .stat-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+            margin-bottom: 15px;
+        }
+        
+        .stat-text {
+            color: var(--text-light);
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+        
+        /* Contact улучшенный */
+        .contact {
+            padding: 120px 0;
         }
         
         .contact-wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            gap: 70px;
             align-items: start;
         }
         
         .contact-info {
             background: var(--gray);
-            border-radius: 16px;
-            padding: 40px;
-            border: 1px solid var(--light-gray);
+            border-radius: 25px;
+            padding: 50px 40px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .contact-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
         }
         
         .contact-item {
             display: flex;
             align-items: center;
             gap: 20px;
-            margin-bottom: 30px;
+            margin-bottom: 35px;
+            transition: transform 0.3s;
+        }
+        
+        .contact-item:hover {
+            transform: translateX(10px);
         }
         
         .contact-icon {
-            width: 60px;
-            height: 60px;
+            width: 65px;
+            height: 65px;
             background: rgba(0, 168, 255, 0.1);
-            border-radius: 12px;
+            border-radius: 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: var(--accent);
-            font-size: 1.5rem;
+            font-size: 1.7rem;
+            flex-shrink: 0;
         }
         
         .contact-details h4 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 5px;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 8px;
         }
         
         .contact-details p {
             color: var(--text-gray);
+            font-size: 1.05rem;
         }
         
         .telegram-cta {
-            margin-top: 40px;
+            margin-top: 50px;
+            background: rgba(0, 168, 255, 0.05);
+            border-radius: 20px;
+            padding: 30px;
+            border: 1px solid rgba(0, 168, 255, 0.1);
         }
         
         .telegram-btn {
@@ -346,10 +614,40 @@
             margin-top: 20px;
         }
         
-        /* Footer */
+        .benefits-list {
+            padding-top: 20px;
+        }
+        
+        .benefits-list li {
+            margin-bottom: 25px;
+            padding-left: 35px;
+            position: relative;
+        }
+        
+        .benefits-list i {
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 1.3rem;
+            background: rgba(0, 168, 255, 0.1);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .benefits-list h4 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+        
+        /* Footer улучшенный */
         footer {
             background: var(--darker);
-            padding: 60px 0 30px;
+            padding: 80px 0 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
         
@@ -357,44 +655,53 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
         }
         
-        .footer-links {
+        .social-links {
             display: flex;
-            gap: 30px;
+            gap: 20px;
         }
         
-        .footer-links a {
-            color: var(--text-gray);
+        .social-link {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.3rem;
             text-decoration: none;
-            font-size: 1rem;
-            transition: color 0.3s;
+            transition: all 0.3s;
         }
         
-        .footer-links a:hover {
-            color: var(--accent);
+        .social-link:hover {
+            background: var(--gradient);
+            transform: translateY(-5px);
         }
         
         .copyright {
             text-align: center;
             color: var(--text-gray);
-            padding-top: 30px;
+            padding-top: 40px;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
-            font-size: 0.9rem;
+            font-size: 1rem;
         }
         
-        /* Mobile Menu */
+        /* Mobile Menu улучшенный */
         .mobile-menu {
             position: fixed;
             top: 0;
             right: -100%;
             width: 100%;
             height: 100vh;
-            background: var(--dark);
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
             z-index: 9999;
             padding: 100px 30px 30px;
-            transition: right 0.3s ease;
+            transition: right 0.4s cubic-bezier(0.77, 0, 0.175, 1);
             overflow-y: auto;
         }
         
@@ -409,8 +716,13 @@
             background: none;
             border: none;
             color: var(--white);
-            font-size: 1.5rem;
+            font-size: 1.8rem;
             cursor: pointer;
+            transition: transform 0.3s;
+        }
+        
+        .mobile-menu-close:hover {
+            transform: rotate(90deg);
         }
         
         .mobile-nav-links {
@@ -418,35 +730,103 @@
         }
         
         .mobile-nav-links li {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s;
         }
+        
+        .mobile-menu.active .mobile-nav-links li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        .mobile-nav-links li:nth-child(1) { transition-delay: 0.1s; }
+        .mobile-nav-links li:nth-child(2) { transition-delay: 0.2s; }
+        .mobile-nav-links li:nth-child(3) { transition-delay: 0.3s; }
+        .mobile-nav-links li:nth-child(4) { transition-delay: 0.4s; }
         
         .mobile-nav-links a {
             color: var(--white);
             text-decoration: none;
-            font-size: 1.3rem;
-            font-weight: 500;
+            font-size: 1.5rem;
+            font-weight: 600;
             display: block;
             padding: 15px 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: color 0.3s, padding-left 0.3s;
         }
         
-        /* Responsive */
+        .mobile-nav-links a:hover {
+            color: var(--accent);
+            padding-left: 10px;
+        }
+        
+        /* Кнопка "Наверх" */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--gradient);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(20px);
+            transition: all 0.3s;
+            z-index: 999;
+            box-shadow: 0 5px 20px rgba(0, 168, 255, 0.4);
+            border: none;
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        
+        .scroll-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 168, 255, 0.6);
+        }
+        
+        /* Responsive улучшенный */
         @media (max-width: 1024px) {
             .hero-title {
-                font-size: 2.8rem;
+                font-size: 3rem;
             }
             
             .section-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .services-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             }
             
             .contact-wrapper {
-                gap: 40px;
+                gap: 50px;
+            }
+            
+            .stat-number {
+                font-size: 3rem;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+            
+            .benefits-list {
+                margin-top: 50px;
             }
         }
         
@@ -460,79 +840,109 @@
             }
             
             .hero {
-                padding: 140px 0 80px;
+                padding: 150px 0 100px;
+                text-align: center;
             }
             
             .hero-title {
-                font-size: 2.2rem;
+                font-size: 2.5rem;
             }
             
             .hero-subtitle {
-                font-size: 1.1rem;
+                font-size: 1.15rem;
             }
             
             .hero-btns {
                 flex-direction: column;
+                align-items: center;
             }
             
             .btn {
                 width: 100%;
+                max-width: 300px;
                 justify-content: center;
             }
             
             .services {
-                padding: 80px 0;
+                padding: 100px 0;
             }
             
             .services-grid {
                 grid-template-columns: 1fr;
             }
             
-            .contact {
-                padding: 80px 0;
+            .portfolio-grid {
+                grid-template-columns: 1fr;
             }
             
-            .contact-wrapper {
-                grid-template-columns: 1fr;
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .contact {
+                padding: 100px 0;
             }
             
             .footer-content {
                 flex-direction: column;
-                gap: 30px;
+                gap: 40px;
                 text-align: center;
             }
             
-            .footer-links {
-                flex-direction: column;
-                gap: 20px;
+            .hero-bg {
+                right: -300px;
             }
         }
         
-        @media (max-width: 480px) {
+        @media (max-width: 576px) {
             .container {
                 padding: 0 15px;
             }
             
             .hero-title {
-                font-size: 1.8rem;
+                font-size: 2.2rem;
             }
             
             .section-title {
-                font-size: 1.8rem;
+                font-size: 2rem;
+                margin-bottom: 60px;
             }
             
             .service-card {
-                padding: 30px;
+                padding: 35px 25px;
             }
             
             .contact-info {
-                padding: 30px;
+                padding: 35px 25px;
             }
             
             .tech-tag {
-                padding: 8px 16px;
+                padding: 10px 20px;
                 font-size: 0.9rem;
             }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .scroll-top {
+                bottom: 20px;
+                right: 20px;
+                width: 45px;
+                height: 45px;
+            }
+        }
+        
+        /* Анимация появления элементов */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
     </style>
 </head>
@@ -547,6 +957,8 @@
                 
                 <ul class="nav-links">
                     <li><a href="#services">Услуги</a></li>
+                    <li><a href="#portfolio">Портфолио</a></li>
+                    <li><a href="#stats">Опыт</a></li>
                     <li><a href="#contact">Контакты</a></li>
                 </ul>
                 
@@ -564,6 +976,8 @@
         </button>
         <ul class="mobile-nav-links">
             <li><a href="#services">Услуги</a></li>
+            <li><a href="#portfolio">Портфолио</a></li>
+            <li><a href="#stats">Опыт</a></li>
             <li><a href="#contact">Контакты</a></li>
         </ul>
     </div>
@@ -572,28 +986,30 @@
     <section class="hero">
         <div class="container">
             <div class="hero-content">
-                <h1 class="hero-title">Разработчик Telegram-ботов и ПО</h1>
-                <p class="hero-subtitle">Создаю эффективные решения на Python, Java и C#. От простых ботов до сложных парсеров и десктопных приложений.</p>
+                <h1 class="hero-title fade-in">Разработчик Telegram-ботов и ПО</h1>
+                <p class="hero-subtitle fade-in">Создаю эффективные решения на Python, Java и C#. От простых ботов до сложных парсеров и десктопных приложений. Работаю быстро, качественно и с гарантией результата.</p>
                 
-                <div class="tech-tags">
+                <div class="tech-tags fade-in">
                     <span class="tech-tag">Python</span>
                     <span class="tech-tag">Java</span>
                     <span class="tech-tag">C#</span>
                     <span class="tech-tag">aiogram</span>
                     <span class="tech-tag">Telegram API</span>
                     <span class="tech-tag">SQLite3</span>
+                    <span class="tech-tag">PostgreSQL</span>
                     <span class="tech-tag">aiohttp</span>
                     <span class="tech-tag">pandas</span>
                     <span class="tech-tag">numpy</span>
                     <span class="tech-tag">vk_api</span>
+                    <span class="tech-tag">Selenium</span>
                 </div>
                 
-                <div class="hero-btns">
+                <div class="hero-btns fade-in">
                     <a href="#contact" class="btn btn-primary">
-                        <i class="fab fa-telegram"></i> Написать в Telegram
+                        <i class="fab fa-telegram"></i> Обсудить проект
                     </a>
-                    <a href="#services" class="btn btn-outline">
-                        <i class="fas fa-code"></i> Посмотреть услуги
+                    <a href="#portfolio" class="btn btn-outline">
+                        <i class="fas fa-code"></i> Посмотреть работы
                     </a>
                 </div>
             </div>
@@ -604,33 +1020,76 @@
     <!-- Services Section -->
     <section id="services" class="services">
         <div class="container">
-            <h2 class="section-title">Услуги</h2>
+            <h2 class="section-title fade-in">Услуги</h2>
             <div class="services-grid">
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <div class="service-icon">
                         <i class="fab fa-telegram"></i>
                     </div>
                     <h3 class="service-title">Telegram-боты</h3>
                     <p class="service-desc">Разработка ботов на aiogram и pyTelegramBotAPI любой сложности. Интеграция с базами данных, платежными системами и внешними API.</p>
+                    <ul class="service-features">
+                        <li>Автоматизация бизнес-процессов</li>
+                        <li>Интеграция с CRM и API</li>
+                        <li>Платежные системы (ЮKassa, Stripe)</li>
+                        <li>Мультиязычность и админ-панель</li>
+                    </ul>
                     <div class="service-price">от 5 000 ₽</div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <div class="service-icon">
                         <i class="fas fa-database"></i>
                     </div>
                     <h3 class="service-title">Парсеры данных</h3>
                     <p class="service-desc">Создание парсеров для сбора информации с сайтов и API. Использую BeautifulSoup, Selenium, Scrapy для эффективного сбора данных.</p>
+                    <ul class="service-features">
+                        <li>Парсинг сайтов любой сложности</li>
+                        <li>Обход защиты от парсинга</li>
+                        <li>Структурирование данных</li>
+                        <li>Экспорт в Excel/CSV/JSON</li>
+                    </ul>
                     <div class="service-price">от 7 000 ₽</div>
                 </div>
                 
-                <div class="service-card">
+                <div class="service-card fade-in">
                     <div class="service-icon">
                         <i class="fas fa-desktop"></i>
                     </div>
                     <h3 class="service-title">Десктопные приложения</h3>
                     <p class="service-desc">Разработка ПО для Windows на C#/.NET и Java. Создание интерфейсов, работа с базами данных и интеграция с внешними сервисами.</p>
+                    <ul class="service-features">
+                        <li>Кроссплатформенные решения</li>
+                        <li>Интеграция с Windows API</li>
+                        <li>Работа с локальными БД</li>
+                        <li>Автоматизация рутинных задач</li>
+                    </ul>
                     <div class="service-price">от 10 000 ₽</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="stats">
+        <div class="container">
+            <h2 class="section-title fade-in">Опыт в цифрах</h2>
+            <div class="stats-grid">
+                <div class="stat-card fade-in">
+                    <div class="stat-number" id="projectsCount">0+</div>
+                    <div class="stat-text">Выполненных проектов</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number" id="clientsCount">0+</div>
+                    <div class="stat-text">Довольных клиентов</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number" id="experienceCount">0+</div>
+                    <div class="stat-text">Лет опыта</div>
+                </div>
+                <div class="stat-card fade-in">
+                    <div class="stat-number" id="supportCount">24/7</div>
+                    <div class="stat-text">Поддержка после сдачи</div>
                 </div>
             </div>
         </div>
@@ -639,35 +1098,71 @@
     <!-- Contact Section -->
     <section id="contact" class="contact">
         <div class="container">
-            <h2 class="section-title">Контакты</h2>
+            <h2 class="section-title fade-in">Контакты</h2>
             <div class="contact-wrapper">
-                <div class="contact-info">
-                    <h3 style="font-size: 1.8rem; margin-bottom: 30px;">Обсудим ваш проект</h3>
+                <div class="contact-info fade-in">
+                    <h3 style="font-size: 2rem; margin-bottom: 40px; color: var(--white);">Обсудим ваш проект</h3>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Telegram</h4>
+                            <p>@SuryCode</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email</h4>
+                            <p>contact@surycode.ru</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Время ответа</h4>
+                            <p>1-2 часа в рабочее время</p>
+                        </div>
+                    </div>
+                    
                     <div class="telegram-cta">
-                        <p style="color: var(--text-gray); margin-bottom: 20px;">Обычно отвечаю в течение 1-2 часов</p>
+                        <p style="color: var(--text-light); margin-bottom: 20px; font-size: 1.1rem;">Отправьте сообщение прямо сейчас для быстрого старта</p>
                         <a href="#" class="btn btn-primary telegram-btn" id="telegramBtn">
                             <i class="fab fa-telegram"></i> Написать в Telegram
                         </a>
                     </div>
                 </div>
                 
-                <div>
-                    <h3 style="font-size: 1.8rem; margin-bottom: 25px;">Почему выбирают меня</h3>
-                    <ul style="list-style: none;">
-                        <li style="margin-bottom: 20px; padding-left: 30px; position: relative;">
-                            <i class="fas fa-check" style="color: var(--accent); position: absolute; left: 0; top: 5px;"></i>
-                            <h4 style="font-size: 1.2rem; margin-bottom: 5px;">Чистый код</h4>
-                            <p style="color: var(--text-gray);">Документированный, поддерживаемый код с понятной архитектурой</p>
+                <div class="benefits-list fade-in">
+                    <h3 style="font-size: 2rem; margin-bottom: 40px; color: var(--white);">Почему выбирают меня</h3>
+                    <ul>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <h4>Чистый код</h4>
+                            <p>Документированный, поддерживаемый код с понятной архитектурой и комментариями</p>
                         </li>
-                        <li style="margin-bottom: 20px; padding-left: 30px; position: relative;">
-                            <i class="fas fa-check" style="color: var(--accent); position: absolute; left: 0; top: 5px;"></i>
-                            <h4 style="font-size: 1.2rem; margin-bottom: 5px;">Соблюдение сроков</h4>
-                            <p style="color: var(--text-gray);">Точно оцениваю сроки и придерживаюсь дедлайнов</p>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <h4>Соблюдение сроков</h4>
+                            <p>Точно оцениваю сроки и придерживаюсь дедлайнов. Регулярные отчеты о прогрессе</p>
                         </li>
-                        <li style="margin-bottom: 20px; padding-left: 30px; position: relative;">
-                            <i class="fas fa-check" style="color: var(--accent); position: absolute; left: 0; top: 5px;"></i>
-                            <h4 style="font-size: 1.2rem; margin-bottom: 5px;">Поддержка</h4>
-                            <p style="color: var(--text-gray);">Помогаю с доработками и отвечаю на вопросы после сдачи проекта</p>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <h4>Поддержка после сдачи</h4>
+                            <p>Помогаю с доработками и отвечаю на вопросы после сдачи проекта. Гарантия 30 дней</p>
+                        </li>
+                        <li>
+                            <i class="fas fa-check"></i>
+                            <h4>Прозрачность работы</h4>
+                            <p>Работа через безопасные способы оплаты. Поэтапная оплата и демонстрация результата</p>
                         </li>
                     </ul>
                 </div>
@@ -682,13 +1177,30 @@
                 <a href="#" class="logo">
                     <span class="logo-dot">@</span>SuryCode
                 </a>
+                
+                <div class="social-links">
+                    <a href="#" class="social-link" id="telegramSocial">
+                        <i class="fab fa-telegram"></i>
+                    </a>
+                    <a href="#" class="social-link" id="githubSocial">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link" id="emailSocial">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
             </div>
             
             <div class="copyright">
-                © 2025 SuryCode. Разработка ботов и ПО на Python, Java, C#
+                © 2026 SuryCode. Разработка ботов и ПО на Python, Java, C#. Все права защищены.
             </div>
         </div>
     </footer>
+
+    <!-- Кнопка "Наверх" -->
+    <button class="scroll-top" id="scrollTopBtn">
+        <i class="fas fa-arrow-up"></i>
+    </button>
 
     <script>
         // Mobile menu
@@ -698,24 +1210,48 @@
         
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.add('active');
+            document.body.style.overflow = 'hidden';
         });
         
         mobileMenuClose.addEventListener('click', () => {
             mobileMenu.classList.remove('active');
+            document.body.style.overflow = 'auto';
         });
         
         // Close mobile menu when clicking links
         document.querySelectorAll('.mobile-nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
+                document.body.style.overflow = 'auto';
             });
         });
         
-        // Telegram button
+        // Telegram buttons
         const telegramBtn = document.getElementById('telegramBtn');
+        const telegramSocial = document.getElementById('telegramSocial');
+        
         telegramBtn.addEventListener('click', (e) => {
             e.preventDefault();
             window.open('https://t.me/SuryCode', '_blank');
+        });
+        
+        telegramSocial.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open('https://t.me/SuryCode', '_blank');
+        });
+        
+        // GitHub button
+        const githubSocial = document.getElementById('githubSocial');
+        githubSocial.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.open('https://github.com', '_blank');
+        });
+        
+        // Email button
+        const emailSocial = document.getElementById('emailSocial');
+        emailSocial.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.location.href = 'mailto:contact@surycode.ru';
         });
         
         // Smooth scroll
@@ -740,15 +1276,112 @@
         });
         
         // Header background on scroll
+        const header = document.querySelector('header');
+        const navContainer = document.querySelector('.nav-container');
+        
         window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
             if(window.scrollY > 50) {
-                header.style.backgroundColor = 'rgba(10, 10, 10, 0.98)';
-                header.style.backdropFilter = 'blur(20px)';
+                header.classList.add('scrolled');
+                navContainer.style.padding = '12px 0';
             } else {
-                header.style.backgroundColor = 'rgba(10, 10, 10, 0.95)';
-                header.style.backdropFilter = 'blur(10px)';
+                header.classList.remove('scrolled');
+                navContainer.style.padding = '18px 0';
             }
+        });
+        
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTopBtn');
+        
+        window.addEventListener('scroll', () => {
+            if(window.scrollY > 500) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Animated counters
+        const projectsCount = document.getElementById('projectsCount');
+        const clientsCount = document.getElementById('clientsCount');
+        const experienceCount = document.getElementById('experienceCount');
+        
+        function animateCounter(element, target, duration = 2000) {
+            let start = 0;
+            const increment = target / (duration / 16);
+            const timer = setInterval(() => {
+                start += increment;
+                if(start >= target) {
+                    element.textContent = target + '+';
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(start) + '+';
+                }
+            }, 16);
+        }
+        
+        // Fade-in animation on scroll
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        function checkFade() {
+            fadeElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if(elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // Initialize on load
+        window.addEventListener('load', () => {
+            // Animate counters
+            setTimeout(() => {
+                animateCounter(projectsCount, 50);
+                animateCounter(clientsCount, 35);
+                animateCounter(experienceCount, 3);
+            }, 500);
+            
+            // Check fade elements
+            checkFade();
+        });
+        
+        // Check fade on scroll
+        window.addEventListener('scroll', checkFade);
+        
+        // Add ripple effect to buttons
+        document.querySelectorAll('.btn').forEach(button => {
+            button.addEventListener('click', function(e) {
+                const x = e.clientX - e.target.getBoundingClientRect().left;
+                const y = e.clientY - e.target.getBoundingClientRect().top;
+                
+                const ripples = document.createElement('span');
+                ripples.style.left = x + 'px';
+                ripples.style.top = y + 'px';
+                this.appendChild(ripples);
+                
+                setTimeout(() => {
+                    ripples.remove();
+                }, 1000);
+            });
+        });
+        
+        // Tech tags hover effect
+        document.querySelectorAll('.tech-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-5px) scale(1.05)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
         });
     </script>
 </body>
